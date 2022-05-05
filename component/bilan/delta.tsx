@@ -42,6 +42,7 @@ export const DeltaTemperature = ({ handleTotal, random }: Props) => {
   useEffect(() => {
     formik.resetForm()
   }, [random])
+  console.log('.')
 
   const inputClass =
     'appearance-none block w-full bg-gray-200 text-gray-700 border focus:border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
