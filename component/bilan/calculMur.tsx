@@ -1,15 +1,14 @@
-import { useFormik } from 'formik';
-import { useEffect, useState } from 'react';
-import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
-import { Animated } from 'react-animated-css';
-import { Label } from '../label';
-import { ResultCalcul } from '../result';
+import { useFormik } from 'formik'
+import { useEffect, useState } from 'react'
+import { FaAngleDown, FaAngleUp } from 'react-icons/fa'
+import { Label } from '../label'
+import { ResultCalcul } from '../result'
 interface Props {
-  title: string;
-  handleTotal: any;
-  name: string;
-  initialKdt?: number;
-  random: number;
+  title: string
+  handleTotal: any
+  name: string
+  initialKdt?: number
+  random: number
 }
 
 export const CalculMur = ({
@@ -31,24 +30,24 @@ export const CalculMur = ({
       kdt: initialKdt ? initialKdt : 90,
     },
     onSubmit: async () => {},
-  });
-  const [index, setIndex] = useState(0);
-  const [open, setOpen] = useState(false);
+  })
+  const [index, setIndex] = useState(0)
+  const [open, setOpen] = useState(false)
   const handleOpen = (idx: number) => {
     if (idx !== index && !open) {
-      setOpen(true);
-      setIndex(idx);
+      setOpen(true)
+      setIndex(idx)
     }
     if (idx === index && open) {
-      setOpen(false);
+      setOpen(false)
     }
     if (idx !== index && open) {
-      setIndex(idx);
+      setIndex(idx)
     }
     if (idx === index && !open) {
-      setOpen(true);
+      setOpen(true)
     }
-  };
+  }
   useEffect(() => {
     handleTotal(
       formik.values.kdt *
@@ -60,24 +59,24 @@ export const CalculMur = ({
           ? formik.values.surface
           : formik.values.longueur + formik.values.largeur),
       name
-    );
-  }, [formik.values]);
+    )
+  }, [formik.values])
 
   useEffect(() => {
-    formik.resetForm();
-  }, [random]);
+    formik.resetForm()
+  }, [random])
 
   const inputClass =
-    'appearance-none block w-full bg-gray-200 text-gray-700 border focus:border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white';
+    'appearance-none block w-full bg-gray-200 text-gray-700 border focus:border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
   return (
     <form>
       <div>
         <div
-          className="flex items-center justify-between cursor-pointer"
+          className="flex cursor-pointer items-center justify-between"
           onClick={() => handleOpen(1)}
         >
           <label
-            className="block uppercase tracking-wide text-gray-700 text-md font-bold mb-2 cursor-pointer"
+            className="text-md mb-2 block cursor-pointer font-bold uppercase tracking-wide text-gray-700"
             htmlFor="grid-first-name"
           >
             {title}
@@ -89,152 +88,146 @@ export const CalculMur = ({
           )}
         </div>
         {open && index === 1 && (
-          <Animated
-            animationIn="bounceInLeft"
-            animationOut="fadeOut"
-            isVisible={open}
-          >
-            <div className="transition ease-in-out delay-150">
-              <div className="flex flex-wrap -mx-3 mb-6">
-                <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                  <Label title="Longueur (m)" />
-                  <input
-                    className={inputClass}
-                    onChange={formik.handleChange}
-                    id="longueur"
-                    type="number"
-                    placeholder="0"
-                    name="longueur"
-                    value={formik.values.longueur}
-                  />
-                </div>
-                <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                  <Label title="Largeur (m)" />
-                  <input
-                    className={inputClass}
-                    onChange={formik.handleChange}
-                    id="largeur"
-                    type="number"
-                    placeholder="0"
-                    name="largeur"
-                    value={formik.values.largeur}
-                  />
-                </div>
-                <div className="w-full md:w-1/3 px-3">
-                  <Label title="quantite" />
-                  <input
-                    className={inputClass}
-                    onChange={formik.handleChange}
-                    id="quantite"
-                    type="number"
-                    placeholder="0"
-                    name="quantite"
-                    value={formik.values.quantite}
-                  />
-                </div>
-                <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                  <Label title="Surface (m²)" />
-                  <input
-                    className="appearance-none block w-full bg-gray-200 text-gray-700 border focus:border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name"
-                    type="number"
-                    placeholder="0"
-                    onChange={formik.handleChange}
-                    name="surface"
-                    value={
-                      formik.values.surface !== 0
-                        ? formik.values.surface
-                        : formik.values.longueur * formik.values.largeur
-                    }
-                  />
-                </div>
-                <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                  <Label title="Kdt (W/M²)" />
-                  <input
-                    className="appearance-none block w-full bg-gray-200 text-gray-700 border focus:border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name"
-                    type="number"
-                    placeholder="0"
-                    onChange={formik.handleChange}
-                    name="kdt"
-                    value={formik.values.kdt}
-                  />
-                </div>
-                <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                  <Label title="Facteure chassis" />
-                  <input
-                    className="appearance-none block w-full bg-gray-200 text-gray-700 border focus:border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name"
-                    type="number"
-                    placeholder="0"
-                    onChange={formik.handleChange}
-                    name="chassis"
-                    value={formik.values.chassis}
-                  />
-                </div>
-                <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                  <Label title="Facteur solaire" />
-                  <input
-                    className="appearance-none block w-full bg-gray-200 text-gray-700 border focus:border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name"
-                    type="number"
-                    placeholder="0"
-                    onChange={formik.handleChange}
-                    name="store"
-                    value={formik.values.store}
-                  />
-                </div>
-                <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                  <Label title="temperature soleil C°" />
-                  <input
-                    className="appearance-none block w-full bg-gray-200 text-gray-700 border focus:border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name"
-                    type="number"
-                    placeholder="0"
-                    onChange={formik.handleChange}
-                    name="temperatureSoleil"
-                    value={formik.values.temperatureSoleil}
-                  />
-                </div>
+          <div className="transition delay-150 ease-in-out">
+            <div className="-mx-3 mb-6 flex flex-wrap">
+              <div className="mb-6 w-full px-3 md:mb-0 md:w-1/3">
+                <Label title="Longueur (m)" />
+                <input
+                  className={inputClass}
+                  onChange={formik.handleChange}
+                  id="longueur"
+                  type="number"
+                  placeholder="0"
+                  name="longueur"
+                  value={formik.values.longueur}
+                />
               </div>
-              <div>
-                <Label title="Apport calorifique (WATT)" />
-                <div className="flex">
-                  <ResultCalcul
-                    result={
-                      formik.values.kdt *
+              <div className="mb-6 w-full px-3 md:mb-0 md:w-1/3">
+                <Label title="Largeur (m)" />
+                <input
+                  className={inputClass}
+                  onChange={formik.handleChange}
+                  id="largeur"
+                  type="number"
+                  placeholder="0"
+                  name="largeur"
+                  value={formik.values.largeur}
+                />
+              </div>
+              <div className="w-full px-3 md:w-1/3">
+                <Label title="quantite" />
+                <input
+                  className={inputClass}
+                  onChange={formik.handleChange}
+                  id="quantite"
+                  type="number"
+                  placeholder="0"
+                  name="quantite"
+                  value={formik.values.quantite}
+                />
+              </div>
+              <div className="mb-6 w-full px-3 md:mb-0 md:w-1/3">
+                <Label title="Surface (m²)" />
+                <input
+                  className="mb-3 block w-full appearance-none rounded border bg-gray-200 py-3 px-4 leading-tight text-gray-700 focus:border-gray-700 focus:bg-white focus:outline-none"
+                  id="grid-first-name"
+                  type="number"
+                  placeholder="0"
+                  onChange={formik.handleChange}
+                  name="surface"
+                  value={
+                    formik.values.surface !== 0
+                      ? formik.values.surface
+                      : formik.values.longueur * formik.values.largeur
+                  }
+                />
+              </div>
+              <div className="mb-6 w-full px-3 md:mb-0 md:w-1/3">
+                <Label title="Kdt (W/M²)" />
+                <input
+                  className="mb-3 block w-full appearance-none rounded border bg-gray-200 py-3 px-4 leading-tight text-gray-700 focus:border-gray-700 focus:bg-white focus:outline-none"
+                  id="grid-first-name"
+                  type="number"
+                  placeholder="0"
+                  onChange={formik.handleChange}
+                  name="kdt"
+                  value={formik.values.kdt}
+                />
+              </div>
+              <div className="mb-6 w-full px-3 md:mb-0 md:w-1/3">
+                <Label title="Facteure chassis" />
+                <input
+                  className="mb-3 block w-full appearance-none rounded border bg-gray-200 py-3 px-4 leading-tight text-gray-700 focus:border-gray-700 focus:bg-white focus:outline-none"
+                  id="grid-first-name"
+                  type="number"
+                  placeholder="0"
+                  onChange={formik.handleChange}
+                  name="chassis"
+                  value={formik.values.chassis}
+                />
+              </div>
+              <div className="mb-6 w-full px-3 md:mb-0 md:w-1/3">
+                <Label title="Facteur solaire" />
+                <input
+                  className="mb-3 block w-full appearance-none rounded border bg-gray-200 py-3 px-4 leading-tight text-gray-700 focus:border-gray-700 focus:bg-white focus:outline-none"
+                  id="grid-first-name"
+                  type="number"
+                  placeholder="0"
+                  onChange={formik.handleChange}
+                  name="store"
+                  value={formik.values.store}
+                />
+              </div>
+              <div className="mb-6 w-full px-3 md:mb-0 md:w-1/3">
+                <Label title="temperature soleil C°" />
+                <input
+                  className="mb-3 block w-full appearance-none rounded border bg-gray-200 py-3 px-4 leading-tight text-gray-700 focus:border-gray-700 focus:bg-white focus:outline-none"
+                  id="grid-first-name"
+                  type="number"
+                  placeholder="0"
+                  onChange={formik.handleChange}
+                  name="temperatureSoleil"
+                  value={formik.values.temperatureSoleil}
+                />
+              </div>
+            </div>
+            <div>
+              <Label title="Apport calorifique (WATT)" />
+              <div className="flex">
+                <ResultCalcul
+                  result={
+                    formik.values.kdt *
+                    formik.values.store *
+                    formik.values.chassis *
+                    formik.values.quantite *
+                    formik.values.temperatureSoleil *
+                    (formik.values.surface !== 0
+                      ? formik.values.surface
+                      : formik.values.longueur * formik.values.largeur)
+                  }
+                  value="w"
+                />
+                <ResultCalcul
+                  css="ml-4"
+                  result={
+                    (formik.values.kdt *
                       formik.values.store *
                       formik.values.chassis *
                       formik.values.quantite *
                       formik.values.temperatureSoleil *
                       (formik.values.surface !== 0
                         ? formik.values.surface
-                        : formik.values.longueur * formik.values.largeur)
-                    }
-                    value="w"
-                  />
-                  <ResultCalcul
-                    css="ml-4"
-                    result={
-                      (formik.values.kdt *
-                        formik.values.store *
-                        formik.values.chassis *
-                        formik.values.quantite *
-                        formik.values.temperatureSoleil *
-                        (formik.values.surface !== 0
-                          ? formik.values.surface
-                          : formik.values.longueur * formik.values.largeur)) /
-                      1000
-                    }
-                    value="Kw"
-                  />
-                </div>
+                        : formik.values.longueur * formik.values.largeur)) /
+                    1000
+                  }
+                  value="Kw"
+                />
               </div>
             </div>
-          </Animated>
+          </div>
         )}
-        <div className="my-4 h-0.5 bg-gray-100 w-full" />
+        <div className="my-4 h-0.5 w-full bg-gray-100" />
       </div>
     </form>
-  );
-};
+  )
+}

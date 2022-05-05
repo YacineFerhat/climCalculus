@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import { useEffect, useState } from 'react';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
-import { Animated } from 'react-animated-css';
+ 
 import { Label } from '../label';
 import { ResultCalcul } from '../result';
 interface Props {
@@ -86,11 +86,7 @@ export const CalculPlancher = ({
           )}
         </div>
         {open && index === 1 && (
-          <Animated
-            animationIn="bounceInLeft"
-            animationOut="fadeOut"
-            isVisible={open}
-          >
+          
             <div className="transition ease-in-out delay-150">
               <div className="flex flex-wrap -mx-3 mb-6">
                 <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -187,7 +183,6 @@ export const CalculPlancher = ({
                 </div>
               </div>
             </div>
-          </Animated>
         )}
         <div className="my-4 h-0.5 bg-gray-100 w-full" />
       </div>
