@@ -1,6 +1,6 @@
-import { menu } from '../data/menu'
-import Menu from '../component/menu'
-import { DashboardContainer } from '../component/container'
+import { menu } from '../../data/menu'
+import Menu from '../../component/menu'
+import { DashboardContainer } from '../../component/container'
 
 interface data {
   title: string
